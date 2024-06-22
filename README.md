@@ -1,36 +1,28 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+### v1 samples
 
-## Getting Started
 
-First, run the development server:
+#### Weather Card
+![image](https://github.com/RamGoel/lemmaUI/assets/71088429/4bfab797-98f1-48ed-9a7d-852a23a63853)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+#### Task List
+![image](https://github.com/RamGoel/lemmaUI/assets/71088429/c2213b00-758c-42cd-8b06-b13693b02a2a)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### Order Summary
+![image](https://github.com/RamGoel/lemmaUI/assets/71088429/f7863491-0661-4981-8e5f-ba0b3feaf6bf)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+#### Product List
+![image](https://github.com/RamGoel/lemmaUI/assets/71088429/cb0e1fe0-47e3-4554-808f-e10d19c39eee)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+#### Form Data
+![image](https://github.com/RamGoel/lemmaUI/assets/71088429/1c7ff6f9-2972-434e-8ede-2ee9c22af8cc)
 
-## Learn More
+#### Table Data
+![image](https://github.com/RamGoel/lemmaUI/assets/71088429/0e540e81-556a-47d9-b1c0-2449025cd9b5)
 
-To learn more about Next.js, take a look at the following resources:
+#### Dashboard with Cards
+![image](https://github.com/RamGoel/lemmaUI/assets/71088429/60fead93-30b8-43cd-af52-e167ad26b9c2)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
