@@ -40,6 +40,17 @@ export default function Dashboard() {
                     </div>
                     <button
                         onClick={() => {
+                            if (!user) {
+                                return router.push('/login')
+                            }
+                            router.push('/support')
+                        }}
+                        className="flex items-center justify-center h-[50px] gap-[.5rem] border-[1px] border-[#1e1e1e] rounded-lg min-w-[100px] px-4  hover:bg-[#1e1e1e] cursor-pointer"
+                    >
+                        Contact Support
+                    </button>
+                    <button
+                        onClick={() => {
                             logoutUser()
                             localStorage.clear()
                             window.location.replace('/')

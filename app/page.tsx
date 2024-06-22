@@ -17,17 +17,19 @@ const Home = () => {
                 <p className="text-2xl font-bold tracking-[10px] bg-gradient-to-r from-gray-50 to-gray-500 text-transparent bg-clip-text">
                     LEMMAUI
                 </p>
-                <button
-                    onClick={() => {
-                        if (!user) {
-                            return router.push('/login')
-                        }
-                        router.push('/dashboard')
-                    }}
-                    className="bg-white text-black uppercase tracking-widest font-semibold min-w-[100px] py-4 px-4 rounded-lg ml-auto"
-                >
-                    Sign In
-                </button>
+                <div className="flex items-center justify-end gap-[1rem]">
+                    <button
+                        onClick={() => {
+                            if (!user) {
+                                return router.push('/login')
+                            }
+                            router.push('/dashboard')
+                        }}
+                        className="bg-white text-black uppercase tracking-widest font-semibold min-w-[100px] py-4 px-4 rounded-lg ml-auto"
+                    >
+                        Sign In
+                    </button>
+                </div>
             </div>
             <div className="">
                 <h1 className="text-[150px] font-bold text-center  bg-gradient-to-r from-gray-50 to-gray-500 text-transparent bg-clip-text mx-auto leading-[150px]">

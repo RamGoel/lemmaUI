@@ -21,7 +21,15 @@ export const useEditor = create<EditorStoreProps>((set, get) => ({
         }
         get().setState({ isLoading: true })
         axiosInstance
-            .post('/json-ui/create', { json: get().json })
+            .post(
+                '/json-ui/create',
+                { json: get().json },
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('lemmaToken')}`,
+                    },
+                }
+            )
             .then((res) => {
                 get().setState({ result: res.data.text })
             })
