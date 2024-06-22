@@ -1,6 +1,7 @@
 'use client'
 import { axiosInstance } from "@/lib/axios";
 import { isJSON } from "@/utils/handler";
+import { Editor } from "@monaco-editor/react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
@@ -25,17 +26,17 @@ export default function Home() {
     })
   }
   return (
-    <div className="flex h-screen flex-col items-center justify-between p-24">
+    <div className="flex h-screen items-center gap-[2rem] justify-between p-24">
       <div className="flex flex-col gap-[1rem]">
         <h1 className="text-4xl font-semibold text-center">Generate Frontend from API</h1>
-        <textarea onChange={(e)=>setJSON(e.target.value)} rows={16} placeholder="Paste your API Response" className="w-[700px] bg-slate-900 resize-none focus-visible:outline-0 p-4 rounded-lg" />
+        <Editor onChange={(value)=>setJSON(value||"")}  height="60vh" width={'700px'} defaultLanguage="json" className="overflow-hidden" defaultValue="// some comment" />
         <button onClick={handleGenerateUI} className="text-black font-semibold w-full hover:opacity-80 bg-white h-[50px] rounded-lg flex items-center justify-center">
           {isLoading?'Loading...':'Generate UI'}
         </button>
       </div>
 
 
-      <div dangerouslySetInnerHTML={{__html:ui}} className="text-black">
+      <div dangerouslySetInnerHTML={{__html:ui}} className="text-black w-full">
       </div>
     </div>
   );
