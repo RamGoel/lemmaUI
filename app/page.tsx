@@ -1,43 +1,26 @@
 'use client'
-import { axiosInstance } from "@/lib/axios";
-import { isJSON } from "@/utils/handler";
-import { Editor } from "@monaco-editor/react";
-import { useState } from "react";
-import toast from "react-hot-toast";
+import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+import React from 'react'
 
-export default function Home() {
-  const [json, setJSON]=useState('')
-  const [ui, setUI]=useState('')
-  const [isLoading, setLoading]=useState(false)
-
-  const handleGenerateUI=()=>{
-    if(!isJSON(json)){
-      toast.error('Invalid JSON')
-      return
-    }
-    setLoading(true)
-    axiosInstance.post('/create',{json}).then((res)=>{
-      setUI(res.data.text)
-    }).catch((err)=>{
-      console.log(err)
-      toast.error('Error while generating UI')
-    }).finally(()=>{
-      setLoading(false)
-    })
-  }
+const Home = () => {
+  const router=useRouter()
   return (
-    <div className="flex h-screen items-center gap-[2rem] justify-between p-24">
-      <div className="flex flex-col gap-[1rem]">
-        <h1 className="text-4xl font-semibold text-center">Generate Frontend from API</h1>
-        <Editor onChange={(value)=>setJSON(value||"")}  height="60vh" width={'700px'} defaultLanguage="json" className="overflow-hidden" defaultValue="// Paste your JSON" />
-        <button onClick={handleGenerateUI} className="text-black font-semibold w-full hover:opacity-80 bg-white h-[50px] rounded-lg flex items-center justify-center">
-          {isLoading?'Loading...':'Generate UI'}
-        </button>
+    <div className='flex items-center bg-gradient-to-br from-[#16161694] to-[#2a2a2a] flex-col justify-center h-screen w-full'>
+      <div className='my-4 flex items-center justify-between px-[200px] absolute top-[50px] w-full text-center'>
+      <p className='text-2xl font-bold tracking-[10px] bg-gradient-to-r from-gray-50 to-gray-500 text-transparent bg-clip-text'>LEMMAUI</p>
+        <button onClick={()=>{
+          router.push('/dashboard')
+        }} className='bg-white text-black uppercase tracking-widest font-semibold min-w-[100px] py-4 px-4 rounded-lg ml-auto'>Create Account</button>
       </div>
+      <div className=''>
+      <h1 className='text-[150px] font-bold text-center  bg-gradient-to-r from-gray-50 to-gray-500 text-transparent bg-clip-text mx-auto leading-[150px]'>build frontends easier</h1>
+      <p className='text-center text-2xl mt-4'>Lemma helps you generate appealing interfaces using JSON</p>
+      <Image src={require('@/public/images/demo.png')} alt='demo' className='mx-auto' width={1000} height={500} />
 
-
-      <div dangerouslySetInnerHTML={{__html:ui}} className="text-black bg-white w-full">
       </div>
     </div>
-  );
+  )
 }
+
+export default Home
