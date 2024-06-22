@@ -29,14 +29,14 @@ export default function Home() {
     <div className="flex h-screen items-center gap-[2rem] justify-between p-24">
       <div className="flex flex-col gap-[1rem]">
         <h1 className="text-4xl font-semibold text-center">Generate Frontend from API</h1>
-        <Editor onChange={(value)=>setJSON(value||"")}  height="60vh" width={'700px'} defaultLanguage="json" className="overflow-hidden" defaultValue="// some comment" />
+        <Editor onChange={(value)=>setJSON(value||"")}  height="60vh" width={'700px'} defaultLanguage="json" className="overflow-hidden" defaultValue="// Paste your JSON" />
         <button onClick={handleGenerateUI} className="text-black font-semibold w-full hover:opacity-80 bg-white h-[50px] rounded-lg flex items-center justify-center">
           {isLoading?'Loading...':'Generate UI'}
         </button>
       </div>
 
 
-      <div dangerouslySetInnerHTML={{__html:ui}} className="text-black w-full">
+      <div dangerouslySetInnerHTML={{__html:ui}} className="text-black bg-white w-full">
       </div>
     </div>
   );
