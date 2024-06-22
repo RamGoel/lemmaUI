@@ -3,6 +3,7 @@ import UIAction from '@/components/actions'
 import EmptyUI from '@/components/empty'
 import LoadingUI from '@/components/loading'
 import ResultUI from '@/components/result'
+import { useAuth } from '@/hooks/useAuth'
 import { useEditor } from '@/hooks/useEditor'
 import { Editor } from '@monaco-editor/react'
 import { useRouter } from 'next/navigation'
@@ -11,6 +12,13 @@ import { BsArrowUpRight } from 'react-icons/bs'
 export default function Dashboard() {
     const router = useRouter()
     const { isLoading, json, result, setState } = useEditor()
+    const { user, logoutUser } = useAuth()
+
+    if (!user) {
+        router.push('/')
+        return
+    }
+
     return (
         <div className="flex h-screen items-center gap-[2rem] justify-between">
             <div className=" flex items-center justify-between px-[200px] absolute top-[30px] w-full text-center">
@@ -20,14 +28,21 @@ export default function Dashboard() {
 
                 <div className="flex items-center justify-end gap-[1rem]">
                     <div>
-                        Current Plan: <span className="underline">BASIC</span>
+                        {user.name}{' '}
+                        <span
+                            className={`px-4 ml-2 py-1 rounded-full bg-gradient-to-r ${user.plan === 'free' ? 'from-blue-500 to-blue-600' : 'from-orange-500 to-yellow-600'} text-transparent text-white font-semibold`}
+                        >
+                            {user.plan.toUpperCase()}
+                        </span>
                     </div>
                     <div className="flex items-center justify-center h-[50px] gap-[.5rem] border-[1px] border-[#1e1e1e] rounded-lg min-w-[100px] px-4  hover:bg-[#1e1e1e] cursor-pointer">
                         Upgrade <BsArrowUpRight />
                     </div>
                     <button
                         onClick={() => {
-                            router.push('/')
+                            logoutUser()
+                            localStorage.clear()
+                            window.location.replace('/')
                         }}
                         className="bg-white text-black uppercase tracking-widest font-semibold min-w-[100px] py-3 px-4 rounded-lg ml-auto"
                     >

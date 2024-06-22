@@ -1,9 +1,16 @@
 'use client'
+import { useAuth } from '@/hooks/useAuth'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 const Home = () => {
     const router = useRouter()
+    const { user, fetchUserData } = useAuth()
+
+    useEffect(() => {
+        fetchUserData()
+    }, [])
     return (
         <div className="flex items-center bg-gradient-to-br from-[#16161694] to-[#2a2a2a] flex-col justify-center h-screen w-full">
             <div className=" flex items-center justify-between px-[200px] absolute top-[30px] w-full text-center">
@@ -12,6 +19,9 @@ const Home = () => {
                 </p>
                 <button
                     onClick={() => {
+                        if (!user) {
+                            return router.push('/login')
+                        }
                         router.push('/dashboard')
                     }}
                     className="bg-white text-black uppercase tracking-widest font-semibold min-w-[100px] py-4 px-4 rounded-lg ml-auto"

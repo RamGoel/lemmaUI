@@ -40,13 +40,13 @@ const UIAction = () => {
                 </button>
             ) : null}
 
-            <select className="flex items-center justify-center bg-transparent gap-[.5rem] border-[1px] border-[#1e1e1e] rounded-lg min-w-[100px] px-4 h-[40px] hover:bg-[#1e1e1e]">
+            {/* <select className="flex items-center justify-center bg-transparent gap-[.5rem] border-[1px] border-[#1e1e1e] rounded-lg min-w-[100px] px-4 h-[40px] hover:bg-[#1e1e1e]">
                 <option value="chakra">Chakra UI</option>
                 <option value="mui">Material UI</option>
                 <option selected value="tailwind">
                     Tailwind
                 </option>
-            </select>
+            </select> */}
 
             <button
                 onClick={() => {

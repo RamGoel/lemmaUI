@@ -21,7 +21,7 @@ export const useEditor = create<EditorStoreProps>((set, get) => ({
         }
         get().setState({ isLoading: true })
         axiosInstance
-            .post('/create', { json: get().json })
+            .post('/json-ui/create', { json: get().json })
             .then((res) => {
                 get().setState({ result: res.data.text })
             })
