@@ -33,7 +33,7 @@ const Home = () => {
             </div>
             <div className="">
                 <h1 className="text-[150px] font-bold text-center  bg-gradient-to-r from-gray-50 to-gray-500 text-transparent bg-clip-text mx-auto leading-[150px]">
-                    build frontends easier
+                    build frontends faster
                 </h1>
                 <p className="text-center text-2xl mt-4">
                     Lemma helps you generate appealing interfaces using JSON
