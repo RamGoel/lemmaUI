@@ -1,23 +1,29 @@
+import { useAuth } from '@/hooks/useAuth'
 import { useEditor } from '@/hooks/useEditor'
 import toast from 'react-hot-toast'
 import { BsArrowRight, BsCopy, BsEraser } from 'react-icons/bs'
 import { LuRepeat } from 'react-icons/lu'
 
 const UIAction = () => {
-    const { fetchResult, setState, isLoading, result } = useEditor()
+    const { fetchResult, setState, isLoading, result, json } = useEditor()
+    const { chargeUserForToken } = useAuth()
+
+    const handleGenerate = async () => {
+        fetchResult(() => {
+            chargeUserForToken(JSON.stringify(json).length)
+        })
+    }
     return (
         <div className="flex items-center justify-start gap-[1rem]">
             <button
-                onClick={() => fetchResult()}
+                onClick={handleGenerate}
                 className="flex items-center justify-center h-[40px] gap-[.5rem] border-[1px] border-[#1e1e1e] rounded-lg min-w-[100px] px-4  hover:bg-[#1e1e1e]"
             >
                 Convert <BsArrowRight />
             </button>
             {result ? (
                 <button
-                    onClick={() => {
-                        fetchResult()
-                    }}
+                    onClick={handleGenerate}
                     className="flex items-center justify-center h-[40px] gap-[.5rem] border-[1px] border-[#1e1e1e] rounded-lg min-w-[100px] px-4  hover:bg-[#1e1e1e]"
                 >
                     Generate Again <LuRepeat />

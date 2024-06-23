@@ -1,6 +1,7 @@
 'use client'
 import { useAuth } from '@/hooks/useAuth'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 
@@ -18,6 +19,9 @@ const Home = () => {
                     LEMMAUI
                 </p>
                 <div className="flex items-center justify-end gap-[1rem]">
+                    <Link className="underline" href={'/upgrade'}>
+                        View Plans
+                    </Link>
                     <button
                         onClick={() => {
                             if (!user) {

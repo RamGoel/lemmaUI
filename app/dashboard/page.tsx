@@ -3,11 +3,13 @@ import UIAction from '@/components/actions'
 import EmptyUI from '@/components/empty'
 import LoadingUI from '@/components/loading'
 import ResultUI from '@/components/result'
+import TokenBar from '@/components/tokens'
 import { useAuth } from '@/hooks/useAuth'
 import { useEditor } from '@/hooks/useEditor'
 import { Editor } from '@monaco-editor/react'
 import { useRouter } from 'next/navigation'
 import { BsArrowUpRight } from 'react-icons/bs'
+import { RiCustomerServiceLine } from 'react-icons/ri'
 
 export default function Dashboard() {
     const router = useRouter()
@@ -27,6 +29,7 @@ export default function Dashboard() {
                 </p>
 
                 <div className="flex items-center justify-end gap-[1rem]">
+                    <TokenBar />
                     <div>
                         {user.name}{' '}
                         <span
@@ -35,20 +38,15 @@ export default function Dashboard() {
                             {user.plan.toUpperCase()}
                         </span>
                     </div>
-                    <div className="flex items-center justify-center h-[50px] gap-[.5rem] border-[1px] border-[#1e1e1e] rounded-lg min-w-[100px] px-4  hover:bg-[#1e1e1e] cursor-pointer">
-                        Upgrade <BsArrowUpRight />
-                    </div>
-                    <button
+                    <div
                         onClick={() => {
-                            if (!user) {
-                                return router.push('/login')
-                            }
-                            router.push('/support')
+                            router.push('/upgrade')
                         }}
                         className="flex items-center justify-center h-[50px] gap-[.5rem] border-[1px] border-[#1e1e1e] rounded-lg min-w-[100px] px-4  hover:bg-[#1e1e1e] cursor-pointer"
                     >
-                        Contact Support
-                    </button>
+                        Upgrade <BsArrowUpRight />
+                    </div>
+
                     <button
                         onClick={() => {
                             logoutUser()
@@ -68,7 +66,7 @@ export default function Dashboard() {
                     </h1>
                     <UIAction />
                 </div>
-                <div className="flex items-stretch justify-center w-10/12 mx-auto gap-[3rem]">
+                <div className="flex items-stretch max-h-[700px] justify-center w-10/12 mx-auto gap-[3rem]">
                     <Editor
                         onChange={(value) => setState({ json: value || '' })}
                         height="60vh"
@@ -88,6 +86,17 @@ export default function Dashboard() {
                         <EmptyUI />
                     )}
                 </div>
+                <button
+                    onClick={() => {
+                        if (!user) {
+                            return router.push('/login')
+                        }
+                        router.push('/support')
+                    }}
+                    className="flex absolute bottom-8 left-8 items-center justify-center h-[60px] w-[60px] gap-[.5rem] border-[1px] border-[#1e1e1e] rounded-full  hover:bg-[#1e1e1e] cursor-pointer"
+                >
+                    <RiCustomerServiceLine size={30} />
+                </button>
             </div>
         </div>
     )

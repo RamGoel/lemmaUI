@@ -9,6 +9,7 @@ interface AuthStoreProps {
     logoutUser: () => void
     createUser: (name: string, email: string, password: string) => void
     fetchUserData: () => void
+    chargeUserForToken: (charge: number) => void
 }
 export const useAuth = create<AuthStoreProps>((set, get) => ({
     user: null,
@@ -46,6 +47,25 @@ export const useAuth = create<AuthStoreProps>((set, get) => ({
                     Authorization: `Bearer ${localStorage.getItem('lemmaToken')}`,
                 },
             })
+            .then((res) => {
+                set({ user: res.data.user })
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    },
+
+    chargeUserForToken: (charge) => {
+        axiosInstance
+            .post(
+                '/auth/charge',
+                { chargedTokens: charge },
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('lemmaToken')}`,
+                    },
+                }
+            )
             .then((res) => {
                 set({ user: res.data.user })
             })

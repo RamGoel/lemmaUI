@@ -3,6 +3,6 @@ export interface User {
     email: string
     password: string
     currTokens: number
-    plan: 'free' | 'pro'
+    plan: 'free' | 'proYearly' | 'proMonthly'
     extraInfo: any
 }

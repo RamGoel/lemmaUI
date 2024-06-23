@@ -7,21 +7,22 @@ interface EditorStoreProps {
     json: string
     result: string
     isLoading: boolean
-    fetchResult: () => void
+    fetchResult: (callback?: () => void) => void
     setState: (state: Partial<EditorStoreProps>) => void
 }
 export const useEditor = create<EditorStoreProps>((set, get) => ({
     json: '',
     result: '',
     isLoading: false,
-    fetchResult: () => {
+    fetchResult: async (callback) => {
         if (!isJSON(get().json)) {
             toast.error('Invalid JSON')
             return
         }
         get().setState({ isLoading: true })
-        axiosInstance
-            .post(
+
+        try {
+            const res = await axiosInstance.post(
                 '/json-ui/create',
                 { json: get().json },
                 {
@@ -30,16 +31,18 @@ export const useEditor = create<EditorStoreProps>((set, get) => ({
                     },
                 }
             )
-            .then((res) => {
-                get().setState({ result: res.data.text })
-            })
-            .catch((err) => {
-                console.log(err)
-                toast.error('Error while generating UI')
-            })
-            .finally(() => {
-                get().setState({ isLoading: false })
-            })
+
+            get().setState({ result: res.data.text })
+
+            if (callback) {
+                callback()
+            }
+        } catch (err) {
+            console.log(err)
+            toast.error('Error while generating UI')
+        } finally {
+            get().setState({ isLoading: false })
+        }
     },
     setState: (state) => set({ ...get(), ...state }),
 }))
