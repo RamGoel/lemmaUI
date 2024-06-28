@@ -7,6 +7,7 @@ import TokenBar from '@/components/tokens'
 import { useAuth } from '@/hooks/useAuth'
 import { useEditor } from '@/hooks/useEditor'
 import { Editor } from '@monaco-editor/react'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { BsArrowUpRight } from 'react-icons/bs'
 import { RiCustomerServiceLine } from 'react-icons/ri'
@@ -51,7 +52,7 @@ export default function Dashboard() {
                         onClick={() => {
                             logoutUser()
                             localStorage.clear()
-                            window.location.replace('/')
+                            router.push('/')
                         }}
                         className="bg-white text-black uppercase tracking-widest font-semibold min-w-[100px] py-3 px-4 rounded-lg ml-auto"
                     >
@@ -86,17 +87,12 @@ export default function Dashboard() {
                         <EmptyUI />
                     )}
                 </div>
-                <button
-                    onClick={() => {
-                        if (!user) {
-                            return router.push('/login')
-                        }
-                        router.push('/support')
-                    }}
+                <Link
+                    href="mailto:rgoel766@gmail.com"
                     className="flex absolute bottom-8 left-8 items-center justify-center h-[60px] w-[60px] gap-[.5rem] border-[1px] border-[#1e1e1e] rounded-full  hover:bg-[#1e1e1e] cursor-pointer"
                 >
                     <RiCustomerServiceLine size={30} />
-                </button>
+                </Link>
             </div>
         </div>
     )

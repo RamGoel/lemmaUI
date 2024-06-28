@@ -1,6 +1,7 @@
 'use client'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import toast from 'react-hot-toast'
 import { BsArrowLeft, BsArrowRight } from 'react-icons/bs'
 
 const Upgrade = () => {
@@ -111,7 +112,17 @@ const Upgrade = () => {
                                             }
                                         )}
                                     </div>
-                                    <button className="bg-white w-full h-[40px] rounded-lg text-black font-semibold mt-4">
+                                    <button
+                                        onClick={() => {
+                                            toast(
+                                                'Payment method coming soon!',
+                                                {
+                                                    icon: '🚀',
+                                                }
+                                            )
+                                        }}
+                                        className="bg-white w-full h-[40px] rounded-lg text-black font-semibold mt-4"
+                                    >
                                         Pay with LemonSqueezy
                                     </button>
                                 </div>
