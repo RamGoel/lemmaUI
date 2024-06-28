@@ -6,9 +6,15 @@ import { LuRepeat } from 'react-icons/lu'
 
 const UIAction = () => {
     const { fetchResult, setState, isLoading, result, json } = useEditor()
-    const { chargeUserForToken } = useAuth()
+    const { chargeUserForToken, user } = useAuth()
 
     const handleGenerate = async () => {
+        if (user?.currTokens && user?.currTokens !== 500) {
+            toast.error(
+                'We allow only 1 try per user. Please wait till we launch full app.'
+            )
+            return
+        }
         fetchResult(() => {
             chargeUserForToken(JSON.stringify(json).length)
         })
