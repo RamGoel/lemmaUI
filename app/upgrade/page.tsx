@@ -47,6 +47,9 @@ const Upgrade = () => {
                 >
                     <BsArrowLeft /> Go back
                 </div>
+                <p className="font-semibold text-yellow-400 animate-pulse">
+                    Lemma is Free for Now, Enjoy :)
+                </p>
                 <h1 className="text-7xl font-bold">Upgrade your plan</h1>
                 <p className="text-xl">
                     and enjoy all the amazing features and perks of Lemma

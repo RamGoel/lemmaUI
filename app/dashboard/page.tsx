@@ -9,17 +9,45 @@ import { useEditor } from '@/hooks/useEditor'
 import { Editor } from '@monaco-editor/react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import React, { useEffect } from 'react'
 import { BsArrowUpRight } from 'react-icons/bs'
 import { RiCustomerServiceLine } from 'react-icons/ri'
 
 export default function Dashboard() {
     const router = useRouter()
+    const editorRef = React.useRef<any>()
     const { isLoading, json, result, setState } = useEditor()
     const { user, logoutUser } = useAuth()
+
+    useEffect(() => {
+        const handleKeyDown = (e: any) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                e.preventDefault()
+                formatCode()
+            }
+        }
+
+        window.addEventListener('keydown', handleKeyDown)
+
+        // Cleanup event listener on component unmount
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown)
+        }
+    }, [])
 
     if (!user) {
         router.push('/')
         return
+    }
+
+    const handleEditorDidMount = (editor: any, monaco: any) => {
+        editorRef.current = editor
+    }
+
+    const formatCode = () => {
+        if (editorRef.current) {
+            editorRef.current.getAction('editor.action.formatDocument').run()
+        }
     }
 
     return (
@@ -70,13 +98,22 @@ export default function Dashboard() {
                 <div className="flex items-stretch justify-center w-10/12 mx-auto gap-[3rem]">
                     <Editor
                         onChange={(value) => setState({ json: value || '' })}
-                        height="50vh"
+                        height="60vh"
                         width={'40vw'}
                         value={json}
                         theme="vs-dark"
                         defaultLanguage="json"
                         className="overflow-hidden text-xs rounded-lg"
                         defaultValue="// Paste your JSON"
+                        onMount={handleEditorDidMount}
+                        options={{
+                            minimap: {
+                                enabled: false as any,
+                            },
+                            lineNumbers: 'off' as any,
+                            lineDecorationsWidth: 0 as any,
+                            smoothScrolling: true as any,
+                        }}
                     />
 
                     {isLoading ? (

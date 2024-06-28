@@ -9,7 +9,11 @@ const UIAction = () => {
     const { chargeUserForToken, user } = useAuth()
 
     const handleGenerate = async () => {
-        if (user?.currTokens && user?.currTokens !== 500) {
+        if (
+            user?.email !== 'rgoel766@gmail.com' &&
+            user?.currTokens &&
+            user?.currTokens !== 500
+        ) {
             toast.error(
                 'We allow only 1 try per user. Please wait till we launch full app.'
             )
