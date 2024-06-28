@@ -22,7 +22,7 @@ const Signup = () => {
     }
     return (
         <div className="flex items-center h-screen justify-center">
-            <div className="min-w-[20vw]">
+            <div className="min-w-[25rem]">
                 <p className="text-2xl text-center font-bold tracking-[10px] bg-gradient-to-r from-gray-50 to-gray-500 text-transparent bg-clip-text">
                     LEMMAUI
                 </p>
@@ -35,7 +35,7 @@ const Signup = () => {
                         value={name}
                         required
                         onChange={(e) => setName(e.target.value)}
-                        className="w-full h-[40px] border-[1px] placeholder:text-white placeholder:opacity-30 px-4 border-[#1e1e1e] rounded-lg bg-transparent"
+                        className="w-full h-[40px] border-[1px] text-sm placeholder:text-white placeholder:opacity-30 px-4 border-[#1e1e1e] rounded-lg bg-transparent"
                         type="text"
                         placeholder="Full Name"
                     />
@@ -43,7 +43,7 @@ const Signup = () => {
                         value={email}
                         required
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full h-[40px] border-[1px] placeholder:text-white placeholder:opacity-30 px-4 border-[#1e1e1e] rounded-lg bg-transparent"
+                        className="w-full h-[40px] border-[1px] text-sm placeholder:text-white placeholder:opacity-30 px-4 border-[#1e1e1e] rounded-lg bg-transparent"
                         type="text"
                         placeholder="Enter your email"
                     />
@@ -51,7 +51,7 @@ const Signup = () => {
                         value={password}
                         required
                         onChange={(e) => setPassword(e.target.value)}
-                        className="w-full h-[40px] border-[1px] placeholder:text-white placeholder:opacity-30 px-4 border-[#1e1e1e] rounded-lg bg-transparent"
+                        className="w-full h-[40px] border-[1px] text-sm placeholder:text-white placeholder:opacity-30 px-4 border-[#1e1e1e] rounded-lg bg-transparent"
                         type="password"
                         placeholder="Password"
                     />

@@ -39,8 +39,8 @@ const Upgrade = () => {
         },
     ]
     return (
-        <div className="flex items-center justify-center h-screen">
-            <div className="flex flex-col gap-[1rem] text-center">
+        <div className="flex items-center justify-center min-h-screen">
+            <div className="flex flex-col my-[100px] gap-[1rem] text-center">
                 <div
                     onClick={() => router.back()}
                     className="flex absolute top-3 left-3 items-center cursor-pointer justify-start gap-[.5rem] border-[1px] border-[#1e1e1e] rounded-lg w-fit px-4 py-2  hover:bg-[#1e1e1e]"

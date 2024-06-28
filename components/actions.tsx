@@ -9,12 +9,12 @@ const UIAction = () => {
     const { chargeUserForToken, user } = useAuth()
 
     const handleGenerate = async () => {
-        if (user?.currTokens && user?.currTokens !== 500) {
-            toast.error(
-                'We allow only 1 try per user. Please wait till we launch full app.'
-            )
-            return
-        }
+        // if (user?.currTokens && user?.currTokens !== 500) {
+        //     toast.error(
+        //         'We allow only 1 try per user. Please wait till we launch full app.'
+        //     )
+        //     return
+        // }
         fetchResult(() => {
             chargeUserForToken(JSON.stringify(json).length)
         })
@@ -23,14 +23,14 @@ const UIAction = () => {
         <div className="flex items-center justify-start gap-[1rem]">
             <button
                 onClick={handleGenerate}
-                className="flex items-center justify-center h-[40px] gap-[.5rem] border-[1px] border-[#1e1e1e] rounded-lg min-w-[100px] px-4  hover:bg-[#1e1e1e]"
+                className="flex items-center justify-center py-3 text-sm gap-[.5rem] border-[1px] border-[#1e1e1e] rounded-lg min-w-[100px] px-4  hover:bg-[#1e1e1e]"
             >
                 Convert <BsArrowRight />
             </button>
             {result ? (
                 <button
                     onClick={handleGenerate}
-                    className="flex items-center justify-center h-[40px] gap-[.5rem] border-[1px] border-[#1e1e1e] rounded-lg min-w-[100px] px-4  hover:bg-[#1e1e1e]"
+                    className="flex items-center justify-center py-3 text-sm gap-[.5rem] border-[1px] border-[#1e1e1e] rounded-lg min-w-[100px] px-4  hover:bg-[#1e1e1e]"
                 >
                     Generate Again <LuRepeat />
                 </button>
@@ -46,7 +46,7 @@ const UIAction = () => {
                         navigator.clipboard.writeText(result)
                         toast.success('Code Copied')
                     }}
-                    className="flex items-center justify-center h-[40px] gap-[.5rem] border-[1px] border-[#1e1e1e] rounded-lg min-w-[100px] px-4  hover:bg-[#1e1e1e]"
+                    className="flex items-center justify-center py-3 text-sm gap-[.5rem] border-[1px] border-[#1e1e1e] rounded-lg min-w-[100px] px-4  hover:bg-[#1e1e1e]"
                 >
                     Copy Code <BsCopy />
                 </button>
@@ -64,7 +64,7 @@ const UIAction = () => {
                 onClick={() => {
                     setState({ json: '', result: '' })
                 }}
-                className="flex items-center justify-center h-[40px] gap-[.5rem] border-[1px] border-[#1e1e1e] rounded-lg min-w-[100px] px-4  hover:bg-[#1e1e1e]"
+                className="flex items-center justify-center py-3 text-sm gap-[.5rem] border-[1px] border-[#1e1e1e] rounded-lg min-w-[100px] px-4  hover:bg-[#1e1e1e]"
             >
                 Clear <BsEraser />
             </button>
