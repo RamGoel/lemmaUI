@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
+import { isMobile } from 'react-device-detect'
 
 const Home = () => {
     const router = useRouter()
@@ -12,6 +13,14 @@ const Home = () => {
     useEffect(() => {
         fetchUserData()
     }, [])
+
+    if (isMobile) {
+        return (
+            <div>
+                <p>Mobile not supported, please use a computer</p>
+            </div>
+        )
+    }
     return (
         <div className="flex items-center bg-gradient-to-br from-[#16161694] to-[#2a2a2a] flex-col justify-center min-h-screen w-full">
             <div className=" flex items-center justify-between px-[10%] absolute top-[5%] w-full text-center">
