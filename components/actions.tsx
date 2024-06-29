@@ -1,11 +1,13 @@
 import { useAuth } from '@/hooks/useAuth'
 import { useEditor } from '@/hooks/useEditor'
 import toast from 'react-hot-toast'
+import { BiPlus } from 'react-icons/bi'
 import { BsArrowRight, BsCopy, BsEraser } from 'react-icons/bs'
 import { LuRepeat } from 'react-icons/lu'
+import CustomButton from './Button'
 
 const UIAction = () => {
-    const { fetchResult, setState, isLoading, result, json } = useEditor()
+    const { fetchResult, setState, result, json } = useEditor()
     const { chargeUserForToken, user } = useAuth()
 
     const handleGenerate = async () => {
@@ -25,23 +27,29 @@ const UIAction = () => {
     }
     return (
         <div className="flex items-center justify-start gap-[1rem]">
-            <button
+            <CustomButton
+                title="Add Instructions"
+                onClick={() => {}}
+                icon={<BiPlus />}
+            />
+
+            <CustomButton
+                title="Convert"
                 onClick={handleGenerate}
-                className="flex items-center justify-center py-3 text-sm gap-[.5rem] border-[1px] border-[#1e1e1e] rounded-lg min-w-[100px] px-4  hover:bg-[#1e1e1e]"
-            >
-                Convert <BsArrowRight />
-            </button>
+                icon={<BsArrowRight />}
+                iconSide="right"
+            />
+
             {result ? (
-                <button
+                <CustomButton
                     onClick={handleGenerate}
-                    className="flex items-center justify-center py-3 text-sm gap-[.5rem] border-[1px] border-[#1e1e1e] rounded-lg min-w-[100px] px-4  hover:bg-[#1e1e1e]"
-                >
-                    Generate Again <LuRepeat />
-                </button>
+                    title="Generate Again"
+                    icon={<LuRepeat />}
+                />
             ) : null}
 
             {result ? (
-                <button
+                <CustomButton
                     onClick={() => {
                         if (!result) {
                             toast.error('Nothing to copy')
@@ -50,13 +58,12 @@ const UIAction = () => {
                         navigator.clipboard.writeText(result)
                         toast.success('Code Copied')
                     }}
-                    className="flex items-center justify-center py-3 text-sm gap-[.5rem] border-[1px] border-[#1e1e1e] rounded-lg min-w-[100px] px-4  hover:bg-[#1e1e1e]"
-                >
-                    Copy Code <BsCopy />
-                </button>
+                    title="Copy Code"
+                    icon={<BsCopy />}
+                />
             ) : null}
 
-            {/* <select className="flex items-center justify-center bg-transparent gap-[.5rem] border-[1px] border-[#1e1e1e] rounded-lg min-w-[100px] px-4 h-[40px] hover:bg-[#1e1e1e]">
+            {/* <select className="flex items-center justify-center bg-transparent gap-[.5rem] border-[1px]  border-[#1e1e1e] rounded-lg min-w-[100px] px-4 py-3 hover:bg-[#1e1e1e]">
                 <option value="chakra">Chakra UI</option>
                 <option value="mui">Material UI</option>
                 <option selected value="tailwind">
@@ -64,14 +71,13 @@ const UIAction = () => {
                 </option>
             </select> */}
 
-            <button
+            <CustomButton
                 onClick={() => {
                     setState({ json: '', result: '' })
                 }}
-                className="flex items-center justify-center py-3 text-sm gap-[.5rem] border-[1px] border-[#1e1e1e] rounded-lg min-w-[100px] px-4  hover:bg-[#1e1e1e]"
-            >
-                Clear <BsEraser />
-            </button>
+                title="Clear"
+                icon={<BsEraser />}
+            />
         </div>
     )
 }

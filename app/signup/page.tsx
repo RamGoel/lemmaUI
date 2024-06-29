@@ -21,7 +21,7 @@ const Signup = () => {
         createUser(name, email, password)
     }
     return (
-        <div className="flex items-center h-screen justify-center">
+        <div className="flex items-center h-screen bg-white dark:bg-black text-black dark:text-white justify-center">
             <div className="min-w-[25rem]">
                 <p className="text-2xl text-center font-bold tracking-[10px] bg-gradient-to-r from-gray-50 to-gray-500 text-transparent bg-clip-text">
                     LEMMAUI

@@ -39,7 +39,7 @@ const Upgrade = () => {
         },
     ]
     return (
-        <div className="flex items-center justify-center min-h-screen">
+        <div className="flex items-center bg-white dark:bg-black text-black dark:text-white justify-center min-h-screen">
             <div className="flex flex-col my-[100px] gap-[1rem] text-center">
                 <div
                     onClick={() => router.back()}

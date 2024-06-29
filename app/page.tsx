@@ -22,13 +22,16 @@ const Home = () => {
         )
     }
     return (
-        <div className="flex items-center bg-gradient-to-br from-[#16161694] to-[#2a2a2a] flex-col justify-center min-h-screen w-full">
+        <div className="flex items-center dark:bg-black bg-gradient-to-br from-[#16161694] to-[#2a2a2a] flex-col justify-center min-h-screen w-full">
             <div className=" flex items-center justify-between px-[10%] absolute top-[5%] w-full text-center">
                 <p className="text-xl font-bold tracking-[10px] bg-gradient-to-r from-gray-50 to-gray-500 text-transparent bg-clip-text">
                     LEMMAUI
                 </p>
                 <div className="flex items-center justify-end gap-[1rem]">
-                    <Link className="underline" href={'/upgrade'}>
+                    <Link
+                        className="underline text-black dark:text-white"
+                        href={'/upgrade'}
+                    >
                         View Plans
                     </Link>
                     <button
@@ -45,10 +48,10 @@ const Home = () => {
                 </div>
             </div>
             <div className="mt-[100px]">
-                <h1 className=" md:text-[120px] w-10/12 font-bold text-center  bg-gradient-to-r from-gray-50 to-gray-500 text-transparent bg-clip-text mx-auto leading-[150px]">
+                <h1 className=" md:text-[120px] w-10/12 font-bold text-center  bg-gradient-to-r from-gray-400 dark:from-gray-50 to-black dark:to-gray-500 text-transparent bg-clip-text mx-auto leading-[150px]">
                     build frontends faster
                 </h1>
-                <p className="text-center text-xl mt-4">
+                <p className="text-center text-xl text-black dark:text-white mt-4">
                     Lemma helps you generate appealing interfaces using JSON
                 </p>
                 <Image

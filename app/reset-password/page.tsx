@@ -27,7 +27,7 @@ const ResetPassword = () => {
         resetPassword(token, password)
     }
     return (
-        <div className="flex items-center justify-center h-screen w-screen">
+        <div className="flex items-center bg-white dark:bg-black text-black dark:text-white justify-center h-screen w-screen">
             <div className="min-w-[25rem] text-center  ">
                 <p className="text-3xl font-semibold">Reset Password</p>
 

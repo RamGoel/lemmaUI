@@ -1,28 +1,27 @@
-import type { Metadata } from "next";
-import { Inter, Raleway, Roboto, Roboto_Condensed } from "next/font/google";
-import "./globals.css";
-import { Toaster } from "react-hot-toast";
+import MainLayout from '@/layouts/main'
+import type { Metadata } from 'next'
+import { Raleway } from 'next/font/google'
+import './globals.css'
 
 const inter = Raleway({
-  subsets: ["latin"],
-});
+    subsets: ['latin'],
+})
 
 export const metadata: Metadata = {
-  title: "LemmaUI",
-  description: "Generate Appealing Interfaces using JSON",
-};
+    title: 'LemmaUI',
+    description: 'Generate Appealing Interfaces using JSON',
+}
 
 export default function RootLayout({
-  children,
+    children,
 }: Readonly<{
-  children: React.ReactNode;
+    children: React.ReactNode
 }>) {
-  return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Toaster />
-        {children}
-        </body>
-    </html>
-  );
+    return (
+        <html lang="en">
+            <body className={inter.className}>
+                <MainLayout>{children}</MainLayout>
+            </body>
+        </html>
+    )
 }
