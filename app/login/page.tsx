@@ -4,11 +4,12 @@ import { useAuth } from '@/hooks/useAuth'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import toast from 'react-hot-toast'
 
 const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const { loginUser, user } = useAuth()
+    const { loginUser, user, sendPasswordForgotMail } = useAuth()
     const router = useRouter()
 
     if (user) {
@@ -46,6 +47,19 @@ const Login = () => {
                         type="password"
                         placeholder="Password"
                     />
+
+                    <p
+                        onClick={() => {
+                            if (!email) {
+                                toast.error('Please type in your email')
+                                return
+                            }
+                            sendPasswordForgotMail(email)
+                        }}
+                        className=" underline cursor-pointer underline-offset-2 text-end text-sm"
+                    >
+                        Forgot Password?
+                    </p>
                     <button
                         type="submit"
                         className="w-full bg-white hover:bg-gray-300 h-[40px] rounded-lg text-black font-semibold"

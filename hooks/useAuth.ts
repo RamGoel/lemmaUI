@@ -1,5 +1,6 @@
 import { axiosInstance } from '@/lib/axios'
 import { User } from '@/types/user'
+import { extractErrorMessage } from '@/utils/handler'
 import toast from 'react-hot-toast'
 import { create } from 'zustand'
 
@@ -10,6 +11,8 @@ interface AuthStoreProps {
     createUser: (name: string, email: string, password: string) => void
     fetchUserData: () => void
     chargeUserForToken: (charge: number) => void
+    sendPasswordForgotMail: (email: string) => void
+    resetPassword: (token: string, password: string) => void
 }
 export const useAuth = create<AuthStoreProps>((set, get) => ({
     user: null,
@@ -22,7 +25,9 @@ export const useAuth = create<AuthStoreProps>((set, get) => ({
             })
             .catch((err) => {
                 console.log(err)
-                toast.error('Error while logging in')
+                toast.error(
+                    extractErrorMessage(err) || 'Error while logging in'
+                )
             })
     },
     logoutUser() {
@@ -37,7 +42,9 @@ export const useAuth = create<AuthStoreProps>((set, get) => ({
             })
             .catch((err) => {
                 console.log(err)
-                toast.error('Error while creating user')
+                toast.error(
+                    extractErrorMessage(err) || 'Error while creating user'
+                )
             })
     },
     fetchUserData: () => {
@@ -71,6 +78,37 @@ export const useAuth = create<AuthStoreProps>((set, get) => ({
             })
             .catch((err) => {
                 console.log(err)
+            })
+    },
+    sendPasswordForgotMail: (email) => {
+        toast.loading('Sending reset email...')
+        axiosInstance
+            .post('/auth/forgot-password', { email })
+            .then((res) => {
+                toast.remove()
+                toast.success('Sent reset email to ' + email)
+            })
+            .catch((err) => {
+                toast.remove()
+                toast.error(
+                    extractErrorMessage(err) ||
+                        'Error while sending reset email'
+                )
+            })
+    },
+    resetPassword: (token, password) => {
+        toast.loading('Changing password...')
+        axiosInstance
+            .post('/auth/reset-password', { token, password })
+            .then((res) => {
+                toast.remove()
+                toast.success('Password changed successfully')
+            })
+            .catch((err) => {
+                toast.remove()
+                toast.error(
+                    extractErrorMessage(err) || 'Error while changing password'
+                )
             })
     },
 }))
