@@ -1,7 +1,7 @@
 'use client'
 import { useAuth } from '@/hooks/useAuth'
+import { getParameterByName } from '@/utils/handler'
 import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 
@@ -9,7 +9,6 @@ const ResetPassword = () => {
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const { resetPassword } = useAuth()
-    const searchParams = useSearchParams()
 
     const handleSubmit = (e: any) => {
         e.preventDefault()
@@ -18,7 +17,7 @@ const ResetPassword = () => {
             return
         }
 
-        let token = searchParams.get('token')
+        let token = getParameterByName('token')
 
         if (!token) {
             toast.error('Invalid token')

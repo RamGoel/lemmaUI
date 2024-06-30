@@ -4,7 +4,6 @@ import { useAuth } from '@/hooks/useAuth'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import toast from 'react-hot-toast'
 
 const Login = () => {
     const [email, setEmail] = useState('')
@@ -48,7 +47,7 @@ const Login = () => {
                         placeholder="Password"
                     />
 
-                    <p
+                    {/* <p
                         onClick={() => {
                             if (!email) {
                                 toast.error('Please type in your email')
@@ -59,7 +58,7 @@ const Login = () => {
                         className=" underline cursor-pointer underline-offset-2 text-end text-sm"
                     >
                         Forgot Password?
-                    </p>
+                    </p> */}
                     <button
                         type="submit"
                         className="w-full bg-white hover:bg-gray-300 h-[40px] rounded-lg text-black font-semibold"
