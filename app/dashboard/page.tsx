@@ -51,7 +51,7 @@ export default function Dashboard() {
     }
 
     return (
-        <div className="flex items-center gap-[2rem] justify-between">
+        <div className="flex items-center bg-white dark:bg-black text-black dark:text-white gap-[2rem] min-h-screen justify-between">
             <div className=" flex items-center justify-between px-[10%] absolute top-[20px] w-full text-center">
                 <p className="text-2xl font-bold tracking-[10px] bg-gradient-to-r from-gray-50 to-gray-500 text-transparent bg-clip-text">
                     LEMMAUI
@@ -88,11 +88,8 @@ export default function Dashboard() {
                     </button>
                 </div>
             </div>
-            <div className="w-full mt-[150px] flex flex-col gap-[2rem]">
+            <div className="w-full flex flex-col gap-[2rem]">
                 <div className="flex items-start justify-between w-10/12 mx-auto gap-[3rem]">
-                    <h1 className="text-2xl font-semibold text-center">
-                        Generate Frontend from API Response
-                    </h1>
                     <UIAction />
                 </div>
                 <div className="flex items-stretch justify-center w-10/12 mx-auto gap-[3rem]">

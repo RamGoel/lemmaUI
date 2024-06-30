@@ -1,14 +1,23 @@
 import { useAuth } from '@/hooks/useAuth'
 import { useEditor } from '@/hooks/useEditor'
+import { useInstructionModal } from '@/hooks/useInstructionModal'
+import { useSettings } from '@/hooks/useSettings'
 import toast from 'react-hot-toast'
-import { BsArrowRight, BsCopy, BsEraser } from 'react-icons/bs'
-import { LuRepeat } from 'react-icons/lu'
+import { BsArrowRight, BsCopy, BsEraser, BsGear } from 'react-icons/bs'
+import CustomButton from './Button'
 
 const UIAction = () => {
-    const { fetchResult, setState, isLoading, result, json } = useEditor()
+    const { fetchResult, setState, result, json } = useEditor()
     const { chargeUserForToken, user } = useAuth()
+    const { openModal, setConfirmConfig, openConfirmModal } =
+        useInstructionModal()
+    const { openModal: openSettingsModal } = useSettings()
 
     const handleGenerate = async () => {
+        if (!json) {
+            toast.error('Please enter JSON')
+            return
+        }
         if (
             user?.email !== 'rgoel766@gmail.com' &&
             user?.currTokens &&
@@ -19,29 +28,43 @@ const UIAction = () => {
             )
             return
         }
-        fetchResult(() => {
-            chargeUserForToken(JSON.stringify(json).length)
-        })
+
+        let instructionConfirmConfig = {
+            title: 'Give me some instructions',
+            content: 'Do you want to add instructions?',
+            successBtnText: 'Yes',
+            cancelBtnText: 'No, continue',
+            onSubmit: (result: boolean) => {
+                if (result) {
+                    openModal()
+                } else {
+                    fetchResult(() => {
+                        chargeUserForToken(JSON.stringify(json).length)
+                    })
+                }
+            },
+        }
+
+        setConfirmConfig(instructionConfirmConfig)
+        openConfirmModal()
     }
     return (
         <div className="flex items-center justify-start gap-[1rem]">
-            <button
+            <CustomButton
+                title="Convert"
                 onClick={handleGenerate}
-                className="flex items-center justify-center py-3 text-sm gap-[.5rem] border-[1px] border-[#1e1e1e] rounded-lg min-w-[100px] px-4  hover:bg-[#1e1e1e]"
-            >
-                Convert <BsArrowRight />
-            </button>
-            {result ? (
-                <button
-                    onClick={handleGenerate}
-                    className="flex items-center justify-center py-3 text-sm gap-[.5rem] border-[1px] border-[#1e1e1e] rounded-lg min-w-[100px] px-4  hover:bg-[#1e1e1e]"
-                >
-                    Generate Again <LuRepeat />
-                </button>
-            ) : null}
+                icon={<BsArrowRight />}
+                iconSide="right"
+            />
 
+            <CustomButton
+                title="Settings"
+                onClick={openSettingsModal}
+                icon={<BsGear />}
+                iconSide="right"
+            />
             {result ? (
-                <button
+                <CustomButton
                     onClick={() => {
                         if (!result) {
                             toast.error('Nothing to copy')
@@ -50,13 +73,12 @@ const UIAction = () => {
                         navigator.clipboard.writeText(result)
                         toast.success('Code Copied')
                     }}
-                    className="flex items-center justify-center py-3 text-sm gap-[.5rem] border-[1px] border-[#1e1e1e] rounded-lg min-w-[100px] px-4  hover:bg-[#1e1e1e]"
-                >
-                    Copy Code <BsCopy />
-                </button>
+                    title="Copy Code"
+                    icon={<BsCopy />}
+                />
             ) : null}
 
-            {/* <select className="flex items-center justify-center bg-transparent gap-[.5rem] border-[1px] border-[#1e1e1e] rounded-lg min-w-[100px] px-4 h-[40px] hover:bg-[#1e1e1e]">
+            {/* <select className="flex items-center justify-center bg-transparent gap-[.5rem] border-[1px]  border-[#1e1e1e] rounded-lg min-w-[100px] px-4 py-3 hover:bg-[#1e1e1e]">
                 <option value="chakra">Chakra UI</option>
                 <option value="mui">Material UI</option>
                 <option selected value="tailwind">
@@ -64,14 +86,13 @@ const UIAction = () => {
                 </option>
             </select> */}
 
-            <button
+            <CustomButton
                 onClick={() => {
                     setState({ json: '', result: '' })
                 }}
-                className="flex items-center justify-center py-3 text-sm gap-[.5rem] border-[1px] border-[#1e1e1e] rounded-lg min-w-[100px] px-4  hover:bg-[#1e1e1e]"
-            >
-                Clear <BsEraser />
-            </button>
+                title="Clear"
+                icon={<BsEraser />}
+            />
         </div>
     )
 }

@@ -1,12 +1,12 @@
 const ResultUI = ({ htmlCode }: { htmlCode: string }) => {
     return (
-        <div className="flex items-center justify-center flex-1">
-            <div
-                dangerouslySetInnerHTML={{
-                    __html: htmlCode,
-                }}
-                className="text-black bg-white w-full"
-            ></div>
+        <div className="flex items-center !bg-white justify-center flex-1">
+            <iframe
+                src="/result.html"
+                width={700}
+                height={'60vh'}
+                className="h-full"
+            ></iframe>
         </div>
     )
 }
