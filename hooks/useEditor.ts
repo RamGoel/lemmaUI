@@ -7,14 +7,14 @@ interface EditorStoreProps {
     json: string
     result: string
     isLoading: boolean
-    fetchResult: (callback?: () => void) => void
+    fetchResult: (callback?: () => void, instruction?: string) => void
     setState: (state: Partial<EditorStoreProps>) => void
 }
 export const useEditor = create<EditorStoreProps>((set, get) => ({
     json: '',
     result: '',
     isLoading: false,
-    fetchResult: async (callback) => {
+    fetchResult: async (callback, instruction) => {
         if (!isJSON(get().json)) {
             toast.error('Invalid JSON')
             return
@@ -24,7 +24,7 @@ export const useEditor = create<EditorStoreProps>((set, get) => ({
         try {
             const res = await axiosInstance.post(
                 '/json-ui/create',
-                { json: get().json },
+                { json: get().json, ...(instruction ? { instruction } : {}) },
                 {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('lemmaToken')}`,
@@ -32,6 +32,7 @@ export const useEditor = create<EditorStoreProps>((set, get) => ({
                 }
             )
 
+            localStorage.setItem('lemmaHTML', res.data.text)
             get().setState({ result: res.data.text })
 
             if (callback) {

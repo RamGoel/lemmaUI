@@ -1,7 +1,7 @@
 import { useAuth } from '@/hooks/useAuth'
 import { useEditor } from '@/hooks/useEditor'
+import { useInstructionModal } from '@/hooks/useInstructionModal'
 import toast from 'react-hot-toast'
-import { BiPlus } from 'react-icons/bi'
 import { BsArrowRight, BsCopy, BsEraser } from 'react-icons/bs'
 import { LuRepeat } from 'react-icons/lu'
 import CustomButton from './Button'
@@ -9,8 +9,13 @@ import CustomButton from './Button'
 const UIAction = () => {
     const { fetchResult, setState, result, json } = useEditor()
     const { chargeUserForToken, user } = useAuth()
+    const { openModal } = useInstructionModal()
 
     const handleGenerate = async () => {
+        if (!json) {
+            toast.error('Please enter JSON')
+            return
+        }
         if (
             user?.email !== 'rgoel766@gmail.com' &&
             user?.currTokens &&
@@ -21,18 +26,22 @@ const UIAction = () => {
             )
             return
         }
-        fetchResult(() => {
-            chargeUserForToken(JSON.stringify(json).length)
-        })
+
+        let isInstructionNeeded = confirm(
+            'Do you want to add instructions? (OK to proceed)'
+        )
+
+        if (isInstructionNeeded) {
+            openModal()
+            return
+        } else {
+            fetchResult(() => {
+                chargeUserForToken(JSON.stringify(json).length)
+            })
+        }
     }
     return (
         <div className="flex items-center justify-start gap-[1rem]">
-            <CustomButton
-                title="Add Instructions"
-                onClick={() => {}}
-                icon={<BiPlus />}
-            />
-
             <CustomButton
                 title="Convert"
                 onClick={handleGenerate}

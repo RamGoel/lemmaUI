@@ -23,7 +23,7 @@ const CustomButton = ({
             rightIcon={icon}
             variant={'outline'}
             className="!border-[#1e1e1e] hover:!bg-[#1e1e1e] py-3 !text-sm !text-white"
-            onClick={() => {}}
+            onClick={onClick}
         >
             {title}
         </Button>
