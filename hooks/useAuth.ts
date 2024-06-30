@@ -13,6 +13,7 @@ interface AuthStoreProps {
     chargeUserForToken: (charge: number) => void
     sendPasswordForgotMail: (email: string) => void
     resetPassword: (token: string, password: string) => void
+    updateProfile: (newData: Partial<User>) => void
 }
 export const useAuth = create<AuthStoreProps>((set, get) => ({
     user: null,
@@ -110,5 +111,28 @@ export const useAuth = create<AuthStoreProps>((set, get) => ({
                     extractErrorMessage(err) || 'Error while changing password'
                 )
             })
+    },
+    updateProfile: (newData) => {
+        toast.loading('Updating profile...')
+        axiosInstance
+            .put(
+                '/auth/update-profile',
+                {
+                    email: newData.email,
+                    newProfileData: newData,
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('lemmaToken')}`,
+                    },
+                }
+            )
+            .then((res) => {
+                set({ user: res.data })
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+            .finally(() => toast.remove())
     },
 }))

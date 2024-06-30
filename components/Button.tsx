@@ -25,7 +25,7 @@ const CustomButton = ({
             className="!border-[#1e1e1e] hover:!bg-[#1e1e1e] py-3 !text-sm !text-white"
             onClick={onClick}
         >
-            {title}
+            <span className="!font-[400]">{title}</span>
         </Button>
     )
 }

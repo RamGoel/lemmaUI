@@ -30,7 +30,7 @@ const InstructionsModal = () => {
         setInstruction('')
     }
     return (
-        <Modal colorScheme="dark" isOpen={isOpen} onClose={onClose}>
+        <Modal colorScheme="dark" isOpen={isOpen} onClose={onClose} isCentered>
             <ModalOverlay />
 
             <ModalContent className="bg-white  dark:!bg-stone-950 text-black dark:!text-white">

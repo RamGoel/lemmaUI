@@ -1,15 +1,17 @@
 import { useAuth } from '@/hooks/useAuth'
 import { useEditor } from '@/hooks/useEditor'
 import { useInstructionModal } from '@/hooks/useInstructionModal'
+import { useSettings } from '@/hooks/useSettings'
 import toast from 'react-hot-toast'
-import { BsArrowRight, BsCopy, BsEraser } from 'react-icons/bs'
-import { LuRepeat } from 'react-icons/lu'
+import { BsArrowRight, BsCopy, BsEraser, BsGear } from 'react-icons/bs'
 import CustomButton from './Button'
 
 const UIAction = () => {
     const { fetchResult, setState, result, json } = useEditor()
     const { chargeUserForToken, user } = useAuth()
-    const { openModal } = useInstructionModal()
+    const { openModal, setConfirmConfig, openConfirmModal } =
+        useInstructionModal()
+    const { openModal: openSettingsModal } = useSettings()
 
     const handleGenerate = async () => {
         if (!json) {
@@ -27,18 +29,24 @@ const UIAction = () => {
             return
         }
 
-        let isInstructionNeeded = confirm(
-            'Do you want to add instructions? (OK to proceed)'
-        )
-
-        if (isInstructionNeeded) {
-            openModal()
-            return
-        } else {
-            fetchResult(() => {
-                chargeUserForToken(JSON.stringify(json).length)
-            })
+        let instructionConfirmConfig = {
+            title: 'Give me some instructions',
+            content: 'Do you want to add instructions?',
+            successBtnText: 'Yes',
+            cancelBtnText: 'No, continue',
+            onSubmit: (result: boolean) => {
+                if (result) {
+                    openModal()
+                } else {
+                    fetchResult(() => {
+                        chargeUserForToken(JSON.stringify(json).length)
+                    })
+                }
+            },
         }
+
+        setConfirmConfig(instructionConfirmConfig)
+        openConfirmModal()
     }
     return (
         <div className="flex items-center justify-start gap-[1rem]">
@@ -49,14 +57,12 @@ const UIAction = () => {
                 iconSide="right"
             />
 
-            {result ? (
-                <CustomButton
-                    onClick={handleGenerate}
-                    title="Generate Again"
-                    icon={<LuRepeat />}
-                />
-            ) : null}
-
+            <CustomButton
+                title="Settings"
+                onClick={openSettingsModal}
+                icon={<BsGear />}
+                iconSide="right"
+            />
             {result ? (
                 <CustomButton
                     onClick={() => {

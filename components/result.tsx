@@ -4,8 +4,8 @@ const ResultUI = ({ htmlCode }: { htmlCode: string }) => {
             <iframe
                 src="/result.html"
                 width={700}
-                height={700}
-                className=""
+                height={'60vh'}
+                className="h-full"
             ></iframe>
         </div>
     )
