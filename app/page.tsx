@@ -121,7 +121,7 @@ const Home = () => {
 
         if (!user) {
             toast.error('Please sign in to continue')
-            router.push('/login')
+            router.push('/login?prompt=' + promptParam || prompt)
             return
         }
 
@@ -155,6 +155,23 @@ const Home = () => {
             ) : (
                 <Form handleSubmit={handleGenerate} />
             )}
+            {!user ? (
+                <div className="h-[80vh] backdrop-blur-md absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center">
+                    <div className="bg-zinc-800 gap-3 flex flex-col p-4 rounded-lg">
+                        <p className="text-center text-white">
+                            Please sign in to continue
+                        </p>
+                        <button
+                            onClick={() => {
+                                router.push('/login')
+                            }}
+                            className="bg-white w-full text-black font-semibold min-w-[100px] py-2 px-3 rounded-lg ml-auto"
+                        >
+                            Sign In
+                        </button>
+                    </div>
+                </div>
+            ) : null}
         </div>
     )
 }
@@ -193,7 +210,8 @@ const Form = ({
                             onClick={() => {
                                 handleSubmit()
                             }}
-                            className="bg-white hover:bg-white/60 text-black rounded-full p-2"
+                            disabled={!prompt}
+                            className="bg-white disabled:opacity-30 disabled:pointer-events-none disabled:hover:bg-white/60 text-black rounded-full p-2"
                         >
                             <FiArrowUpRight size={24} />
                         </button>
