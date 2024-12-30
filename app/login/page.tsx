@@ -10,8 +10,6 @@ const Login = () => {
     const [password, setPassword] = useState('')
     const { loginUser, user, sendPasswordForgotMail } = useAuth()
     const router = useRouter()
-    const searchParams = useSearchParams()
-    const prompt = searchParams.get('prompt')
 
     if (user) {
         router.push('/')
