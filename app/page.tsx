@@ -1,5 +1,4 @@
 'use client'
-import LoadingUI from '@/components/loading'
 import ResultUI from '@/components/result'
 import TokenBar from '@/components/tokens'
 import { useAuth } from '@/hooks/useAuth'
@@ -8,26 +7,18 @@ import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import { isMobile } from 'react-device-detect'
 import toast from 'react-hot-toast'
-import { BsArrowUpRight, BsInfoCircle } from 'react-icons/bs'
+import { BsInfoCircle } from 'react-icons/bs'
 import { FiArrowUpRight } from 'react-icons/fi'
-import { GiMagicHat } from 'react-icons/gi'
 import {
     RiCodeBlock,
-    RiCodeBoxLine,
     RiCursorLine,
-    RiInfoI,
-    RiLineChartLine,
     RiLoaderLine,
     RiLoginBoxLine,
-    RiPlantLine,
-    RiRunLine,
-    RiSwapBoxLine,
     RiUserLine,
     RiWindow2Line,
 } from 'react-icons/ri'
-import { SiJson } from 'react-icons/si'
-import { TbJson } from 'react-icons/tb'
-export const Presets = [
+
+const Presets = [
     {
         name: 'Create a login page',
         prompt: 'Create a login page',
@@ -39,8 +30,8 @@ export const Presets = [
         icon: <RiUserLine className="text-green-500" />,
     },
     {
-        name: 'Make a loader in React',
-        prompt: 'Make a loader in React',
+        name: 'Make a animated loader',
+        prompt: 'Make a animated loader',
         icon: <RiLoaderLine className="text-orange-500" />,
     },
     {
