@@ -12,7 +12,7 @@ const Login = () => {
     const router = useRouter()
 
     if (user) {
-        router.push('/dashboard')
+        router.push('/')
         return
     }
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -47,18 +47,6 @@ const Login = () => {
                         placeholder="Password"
                     />
 
-                    {/* <p
-                        onClick={() => {
-                            if (!email) {
-                                toast.error('Please type in your email')
-                                return
-                            }
-                            sendPasswordForgotMail(email)
-                        }}
-                        className=" underline cursor-pointer underline-offset-2 text-end text-sm"
-                    >
-                        Forgot Password?
-                    </p> */}
                     <button
                         type="submit"
                         className="w-full bg-white hover:bg-gray-300 h-[40px] rounded-lg text-black font-semibold"

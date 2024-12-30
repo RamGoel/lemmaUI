@@ -6,6 +6,7 @@ interface CustomInputProps extends InputProps {
     errors: any
     values: any
     touched: any
+    className?: string
 }
 const CustomInput = (props: CustomInputProps) => {
     const { errors, id, values, label, touched, ...rest } = props

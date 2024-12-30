@@ -13,7 +13,7 @@ const Signup = () => {
     const router = useRouter()
 
     if (user) {
-        router.push('/dashboard')
+        router.push('/')
         return
     }
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

@@ -4,27 +4,29 @@ import toast from 'react-hot-toast'
 import { create } from 'zustand'
 
 interface EditorStoreProps {
-    json: string
+    prompt: string
     result: string
     isLoading: boolean
-    fetchResult: (callback?: () => void, instruction?: string) => void
+    fetchResult: (callback?: () => void, prompt?: string) => void
     setState: (state: Partial<EditorStoreProps>) => void
 }
 export const useEditor = create<EditorStoreProps>((set, get) => ({
-    json: '',
+    prompt: '',
     result: '',
     isLoading: false,
-    fetchResult: async (callback, instruction) => {
-        if (!isJSON(get().json)) {
-            toast.error('Invalid JSON')
-            return
-        }
+    fetchResult: async (callback, prompt) => {
+        const isJSONInput = isJSON(prompt || get().prompt)
+
         get().setState({ isLoading: true })
 
         try {
             const res = await axiosInstance.post(
                 '/json-ui/create',
-                { json: get().json, ...(instruction ? { instruction } : {}) },
+                {
+                    ...(isJSONInput
+                        ? { json: prompt || get().prompt } // if json input, send json
+                        : { prompt: prompt || get().prompt }), // if prompt input, send prompt
+                },
                 {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('lemmaToken')}`,
@@ -33,7 +35,7 @@ export const useEditor = create<EditorStoreProps>((set, get) => ({
             )
 
             localStorage.setItem('lemmaHTML', res.data.text)
-            get().setState({ result: res.data.text })
+            get().setState({ result: res.data.text, prompt: '' })
 
             if (callback) {
                 callback()
