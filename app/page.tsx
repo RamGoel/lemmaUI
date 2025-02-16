@@ -114,6 +114,10 @@ const Home = () => {
     }
 
     const handleGenerate = async (promptParam?: string) => {
+        if (!user) {
+            toast.error('Not logged in, Please login first')
+            return
+        }
         if (!promptParam && !prompt) {
             toast.error('Please enter prompt')
             return
@@ -155,7 +159,7 @@ const Home = () => {
             ) : (
                 <Form handleSubmit={handleGenerate} />
             )}
-            {!user ? (
+            {/* {!user ? (
                 <div className="h-[80vh] backdrop-blur-md absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center">
                     <div className="bg-zinc-800 gap-3 flex flex-col p-4 rounded-lg">
                         <p className="text-center text-white">
@@ -171,7 +175,7 @@ const Home = () => {
                         </button>
                     </div>
                 </div>
-            ) : null}
+            ) : null} */}
         </div>
     )
 }

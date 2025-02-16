@@ -1,6 +1,5 @@
 'use client'
 import { useAuth } from '@/hooks/useAuth'
-import { useEditor } from '@/hooks/useEditor'
 import { useSettings } from '@/hooks/useSettings'
 import {
     Button,
@@ -18,7 +17,6 @@ import CustomInput from '../Input'
 
 const SettingsModal = () => {
     const { isOpen, onClose } = useSettings()
-    const { fetchResult } = useEditor()
     const { user, updateProfile } = useAuth()
 
     const handleUpdateProfile = (values: any) => {
@@ -31,6 +29,8 @@ const SettingsModal = () => {
         email: user?.email,
         plan: user?.plan,
     }
+
+    if(!isOpen) return;
     return (
         <Modal
             colorScheme="dark"
