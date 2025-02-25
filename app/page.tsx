@@ -245,6 +245,11 @@ const Form = ({
                     </div>
                 </div>
             </div>
+            <script 
+    src="https://updatly.ramgoel.com/widget.js" 
+    data-startup-slug="lemma" 
+    data-theme="dark"
+></script>
             <p className="text-center absolute bottom-6 left-0 right-0 text-sm text-zinc-500">
                 <BsInfoCircle className="inline-block mr-2" />
                 This is a demo version. It might make mistakes.
