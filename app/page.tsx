@@ -5,6 +5,7 @@ import { useAuth } from '@/hooks/useAuth'
 import { useEditor } from '@/hooks/useEditor'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
+import Script from 'next/script'
 import { isMobile } from 'react-device-detect'
 import toast from 'react-hot-toast'
 import { BsInfoCircle } from 'react-icons/bs'
@@ -154,6 +155,11 @@ const Home = () => {
     return (
         <div className="h-screen w-full bg-gradient-to-br from-zinc-950 via-zinc-800 to-zinc-950 text-white">
             <Header />
+            <Script 
+                src="https://updatly.ramgoel.com/widget.js" 
+                data-startup-slug="lemma" 
+                data-theme="dark"
+            />
             {result || isLoading ? (
                 <ResultUI />
             ) : (
@@ -245,11 +251,7 @@ const Form = ({
                     </div>
                 </div>
             </div>
-            <script 
-    src="https://updatly.ramgoel.com/widget.js" 
-    data-startup-slug="lemma" 
-    data-theme="dark"
-></script>
+            
             <p className="text-center absolute bottom-6 left-0 right-0 text-sm text-zinc-500">
                 <BsInfoCircle className="inline-block mr-2" />
                 This is a demo version. It might make mistakes.
